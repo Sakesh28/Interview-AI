@@ -7,6 +7,8 @@ the agent creates the next questions in the interview from the context and also 
 The user interface is made with Streamlit to offer an uninterrupted, engaging chat ​‍​‌‍​‍‌​‍​‌‍​‍‌experience
 
 
+Streamlit - https://interview-ai-4m6fuasqqfgwfxa5hh7vbz.streamlit.app/
+
 ### **Work-Flow**
 
 [Candidate Resume (PDF)] 
