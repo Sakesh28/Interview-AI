@@ -106,16 +106,29 @@ if st.session_state.vectorstore:
 
     # Chat UI
     for msg in st.session_state.chat_history:
-        role = "user" if msg.type == 'human' else "assistant"
+        # Check if the message is a Dictionary (like our Greeting)
+        if isinstance(msg, dict):
+            role = msg["role"]
+            content = msg["content"]
+        # Otherwise, assume it is a LangChain Object (if any appear)
+        else:
+            role = "user" if msg.type == 'human' else "assistant"
+            content = msg.content
+            
         with st.chat_message(role):
-            st.write(msg.content)
+            st.write(content)
 
     if user_input := st.chat_input("Type your answer..."):
+        # 1. Display & Save User Message
+        st.session_state.chat_history.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
             st.write(user_input)
         
+        # 2. Get AI Response
         response = qa_chain.invoke({"question": user_input})
         
+        # 3. Display & Save AI Message
+        st.session_state.chat_history.append({"role": "assistant", "content": response["answer"]})
         with st.chat_message("assistant"):
             st.write(response["answer"])
 else:
