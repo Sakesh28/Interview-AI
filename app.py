@@ -15,8 +15,8 @@ from langchain_classic.prompts import PromptTemplate
 load_dotenv()
 
 # --- CONFIGURATION ---
-st.set_page_config(page_title="AI Interviewer (Free Ver)", layout="wide")
-st.title("🤖 Interview Agent (Powered by Groq)")
+st.set_page_config(page_title="AI Interviewer", layout="wide")
+st.title("🤖 Interview Agent")
 
 
 groq_api_key = os.getenv("GROQ_API_KEY")
