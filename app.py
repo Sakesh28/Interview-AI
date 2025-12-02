@@ -3,8 +3,8 @@ import streamlit as st
 from pypdf import PdfReader
 from dotenv import load_dotenv
 
-from langchain_groq import ChatGroq  # Replaces ChatOpenAI
-from langchain_huggingface import HuggingFaceEmbeddings # Replaces OpenAIEmbeddings
+from langchain_groq import ChatGroq  
+from langchain_huggingface import HuggingFaceEmbeddings 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 
@@ -24,11 +24,26 @@ if not groq_api_key:
     st.error("Groq API Key not found! Please add GROQ_API_KEY to your .env file.")
     st.stop()
 
-# --- SIDEBAR ---
 with st.sidebar:
     st.header("Setup")
     uploaded_file = st.file_uploader("Upload Resume (PDF)", type="pdf")
-    job_role = st.text_input("Job Role", "Python Developer")
+    selected_role = st.selectbox(
+        "Select Job Role", 
+        [
+            "Python Developer", 
+            "Data Scientist", 
+            "Machine Learning Engineer", 
+            "DevOps Engineer", 
+            "Java Developer",
+            "Product Manager",
+            "Other"
+        ]
+    )
+    
+    if selected_role == "Other":
+        job_role = st.text_input("Enter Custom Job Role", "Software Engineer")
+    else:
+        job_role = selected_role
     if st.button("Clear Chat"):
         st.session_state.chat_history = []
         st.rerun()
