@@ -31,7 +31,7 @@ with st.sidebar:
     job_role = st.text_input("Job Role", "Python Developer")
     if st.button("Clear Chat"):
         st.session_state.chat_history = []
-        st.experimental_rerun()
+        st.rerun()
 
 # --- HELPER FUNCTIONS ---
 @st.cache_resource
